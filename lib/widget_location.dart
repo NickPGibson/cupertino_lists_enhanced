@@ -1,0 +1,5 @@
+
+enum WidgetSelectionLocation {
+  leading,
+  trailing
+}
