@@ -1,7 +1,7 @@
 name: cupertino_lists_enhanced
 description: Enhanced cupertino lists
 version: 0.0.1
-homepage:
+repository: https://github.com/NickPGibson/cupertino_lists_enhanced
 
 environment:
   sdk: '>=2.19.4 <3.0.0'
