@@ -8,3 +8,4 @@ A list of options in the style of the iOS settings app. Choose an item (or items
 * **Disable** certain choices
 * Place the check mark at the **leading** or **trailing** edge
 
+![Example screenshot](https://raw.githubusercontent.com/NickPGibson/cupertino_lists_enhanced/main/misc/images/example.png)
