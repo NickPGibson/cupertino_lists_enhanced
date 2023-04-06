@@ -55,6 +55,12 @@ const double _kNotchedSubtitleFontSize = 14.0;
 
 enum _CupertinoListTileType { base, notched }
 
+/// [EnhancedCupertinoListTile] is based on [CupertinoListTile] from the Flutter standard library.
+/// [EnhancedCupertinoListTile] provides `titleBuilder` and `subtitleBuilder` arguments
+/// which allow the caller to provide their own styling through the use of [DefaultTextStyle],
+/// while also still getting the styling provided by this class.
+///
+///
 /// An iOS-style list tile.
 ///
 /// The [EnhancedCupertinoListTile] is a Cupertino equivalent of Material [ListTile].

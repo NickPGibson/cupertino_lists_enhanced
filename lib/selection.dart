@@ -1,6 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 
+/// Provides a list of options.
+/// Use [CupertinoMultiSelection] or [CupertinoSingleSelection].
 class CupertinoSelection<T> extends StatelessWidget {
 
   final Widget? header;
