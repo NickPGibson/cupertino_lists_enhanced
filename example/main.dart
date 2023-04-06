@@ -1,4 +1,5 @@
 import 'package:cupertino_lists_enhanced/multi_selection.dart';
+import 'package:cupertino_lists_enhanced/route.dart';
 import 'package:cupertino_lists_enhanced/selection_item.dart';
 import 'package:cupertino_lists_enhanced/single_selection.dart';
 import 'package:cupertino_lists_enhanced/widget_location.dart';
@@ -35,6 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   String? _singleSelectionValue;
   var _multiSelectionValues = <String?>{"A", "C"};
+  String? _routeValue = "Off";
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +106,42 @@ class _MyHomePageState extends State<MyHomePage> {
                   enabled: false
                 )
               ]
+            ),
+            CupertinoListSection.insetGrouped(
+              header: const Text("showCupertinoSingleSelectionPage"),
+              children: [
+                CupertinoListTile(
+                  title: const Text("Background App Refresh"),
+                  additionalInfo: Text(_routeValue ?? ""),
+                  onTap: () async {
+                    await showCupertinoSingleSelectionPage(
+                      context: context,
+                      title: const Text("Background App Refresh"),
+                      initial: _routeValue,
+                      onChanged: (newValue) {
+                        setState(() {
+                          _routeValue = newValue;
+                        });
+                      },
+                      children: [
+                        SelectionItem<String>(
+                          title: const Text("Off"),
+                          value: "Off",
+                        ),
+                        SelectionItem<String>(
+                          title: const Text("Wi-Fi"),
+                          value: "Wi-Fi",
+                        ),
+                        SelectionItem<String>(
+                          title: const Text("Wi-Fi & Mobile Data"),
+                          value: "Wi-Fi & Mobile Data",
+                        ),
+                      ]
+                    );
+                  },
+                  trailing: const CupertinoListTileChevron(),
+                )
+              ],
             )
           ]
         )

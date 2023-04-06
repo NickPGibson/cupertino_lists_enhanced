@@ -6,12 +6,22 @@ import 'package:cupertino_lists_enhanced/selection_tile.dart';
 import 'package:cupertino_lists_enhanced/widget_location.dart';
 import 'package:flutter/cupertino.dart';
 
+/// Provides a list of options from which the user can select one option.
 class CupertinoSingleSelection<T> extends StatelessWidget {
 
+  /// The options from which the user can choose.
   final List<SelectionItem<T>> children;
+
+  /// The item currently selected.
   final T? selected;
+
+  /// Called every time the user selects an item.
   final ValueChanged<T?>? onChanged;
+
+  /// Displayed above the options. Usually a [Text] widget.
   final Widget? header;
+
+  /// Determines whether the check mark will be located on the leading (left) or trailing (right) side of the tile.
   final WidgetSelectionLocation checkMarkLocation;
 
   const CupertinoSingleSelection({
