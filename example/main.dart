@@ -1,3 +1,4 @@
+import 'package:cupertino_lists_enhanced/list_section.dart';
 import 'package:cupertino_lists_enhanced/multi_selection.dart';
 import 'package:cupertino_lists_enhanced/route.dart';
 import 'package:cupertino_lists_enhanced/selection_item.dart';
@@ -34,9 +35,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  String? _singleSelectionValue;
+  String? _singleSelectionValue = "X";
   var _multiSelectionValues = <String?>{"A", "C"};
-  String? _routeValue = "Off";
+  String? _routeValue = "Wi-Fi";
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             CupertinoSingleSelection<String>(
-              header: const Text("Single Selection"),
+              header: const Text("SINGLE SELECTION"),
+              footer: const Text("Choose a single item from a list of options."),
               selected: _singleSelectionValue,
               onChanged: (newValue) {
                 setState(() {
@@ -65,13 +67,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   value: "Y",
                 ),
                 SelectionItem<String>(
-                  title: const Text("Wi-Fi & Mobile Data"),
+                  title: const Text("Mobile Data"),
+                  enabled: false,
                   value: "Z",
                 ),
               ]
             ),
             CupertinoMultiSelection<String>(
-              header: const Text("Multi Selection"),
+              header: Text("Multi Selection".toUpperCase()),
+              footer: const Text("Choose multiple items from a list of options."),
               selected: _multiSelectionValues,
               onChanged: (newValue) {
                 setState(() {
@@ -107,8 +111,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 )
               ]
             ),
-            CupertinoListSection.insetGrouped(
-              header: const Text("showCupertinoSingleSelectionPage"),
+            EnhancedCupertinoListSection.insetGrouped(
+              header: const Text("FULL SCREEN DIALOG"),
+              footer: const Text("Uses showCupertinoSingleSelectionPage to open a full page dialog to select an item."),
+              headerType: CupertinoListSectionType.base,
+              footerType: CupertinoListSectionType.base,
               children: [
                 CupertinoListTile(
                   title: const Text("Background App Refresh"),
@@ -123,6 +130,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           _routeValue = newValue;
                         });
                       },
+                      header: const Text("BACKGROUND APP REFRESH"),
+                      footer: const Text("Background app refresh requires an internet connection."),
                       children: [
                         SelectionItem<String>(
                           title: const Text("Off"),
@@ -133,8 +142,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           value: "Wi-Fi",
                         ),
                         SelectionItem<String>(
-                          title: const Text("Wi-Fi & Mobile Data"),
-                          value: "Wi-Fi & Mobile Data",
+                          title: const Text("Mobile Data"),
+                          value: "Mobile Data",
                         ),
                       ]
                     );
