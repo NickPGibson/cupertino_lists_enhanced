@@ -11,6 +11,21 @@ class SingleSelectionPage<T> extends StatefulWidget {
   /// Widget to be displayed on the [AppBar]/[CupertinoNavigationBar] of the scaffold.
   final Widget title;
 
+  /// Displayed above the options. Usually a [Text] widget.
+  final Widget? header;
+
+  /// Displayed below the options. Usually a [Text] widget.
+  final Widget? footer;
+
+  /// The type of the header. If "insetGrouped", the header will be displayed
+  /// large and bold like the iOS notes app. If "base", the header will be displayed
+  /// smaller, like the iOS settings app.
+  final CupertinoListSectionType? headerType;
+
+  /// The type of the footer. If "insetGrouped", no styling will be applied.
+  /// If "base", the footer will be displayed in the style of the iOS settings app.
+  final CupertinoListSectionType? footerType;
+
   /// Options from which the user can choose.
   final List<SelectionItem<T>> children;
 
@@ -23,7 +38,17 @@ class SingleSelectionPage<T> extends StatefulWidget {
   /// If [scaffoldType] is material, a material scaffold is used. If [scaffoldType] is cupertino, a cupertino scaffold is used.
   final AppType scaffoldType;
 
-  const SingleSelectionPage({required this.title, required this.children, this.initial, this.onChanged, this.scaffoldType = AppType.cupertino, Key? key}) : super(key: key);
+  const SingleSelectionPage({
+    required this.title,
+    required this.children,
+    this.initial,
+    this.onChanged,
+    this.scaffoldType = AppType.cupertino,
+    this.header,
+    this.footer,
+    this.headerType,
+    this.footerType,
+    Key? key}) : super(key: key);
 
   @override
   State<SingleSelectionPage<T>> createState() => _SingleSelectionPageState<T>();
@@ -43,6 +68,10 @@ class _SingleSelectionPageState<T> extends State<SingleSelectionPage<T>> {
   Widget build(BuildContext context) {
     final body = SingleChildScrollView(
       child: CupertinoSingleSelection<T>(
+        header: widget.header,
+        footer: widget.footer,
+        headerType: widget.headerType,
+        footerType: widget.footerType,
         children: widget.children,
         selected: _selected,
         onChanged: (newValue) {
@@ -91,12 +120,20 @@ Future<T?> showCupertinoSingleSelectionPage<T>({
   T? initial,
   ValueChanged<T?>? onChanged,
   bool useRootNavigator = true,
+  Widget? header,
+  Widget? footer,
+  CupertinoListSectionType? headerType,
+  CupertinoListSectionType? footerType,
   AppType routeType = AppType.cupertino,
   AppType scaffoldType = AppType.cupertino
 }) => Navigator.of(context, rootNavigator: useRootNavigator).push<T>(
     _getRoute<T>(
       appType: routeType,
       builder: (BuildContext context) => SingleSelectionPage<T>(
+        header: header,
+        footer: footer,
+        headerType: headerType,
+        footerType: footerType,
         title: title,
         children: children,
         initial: initial,

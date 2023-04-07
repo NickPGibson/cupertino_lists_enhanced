@@ -1,8 +1,8 @@
 
 /// [EnhancedCupertinoListTile] is based on [CupertinoListTile] from the Flutter standard library.
-/// The license of the original code is below.
+// The license of the original code is below.
 
-/// Copyright 2014 The Flutter Authors. All rights reserved.
+// Copyright 2014 The Flutter Authors. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without modification,
 // are permitted provided that the following conditions are met:
