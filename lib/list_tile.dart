@@ -53,6 +53,8 @@ const double _kNotchedTitleWithSubtitleFontSize = 16.0;
 const double _kSubtitleFontSize = 12.0;
 const double _kNotchedSubtitleFontSize = 14.0;
 
+const double _kPaddingBetweenTitlesAndAdditionalInfo = 10.0;
+
 enum _CupertinoListTileType { base, notched }
 
 /// [EnhancedCupertinoListTile] is based on [CupertinoListTile] from the Flutter standard library.
@@ -313,8 +315,8 @@ class _EnhancedCupertinoListTileState extends State<EnhancedCupertinoListTile> {
 
     final Widget title = DefaultTextStyle(
       style: titleTextStyle,
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
+      maxLines: widget._type == _CupertinoListTileType.notched ? 1 : null,
+      overflow: widget._type == _CupertinoListTileType.notched ? TextOverflow.ellipsis : TextOverflow.clip,
       child: Builder(
         builder: widget.titleBuilder,
       )
@@ -336,8 +338,8 @@ class _EnhancedCupertinoListTileState extends State<EnhancedCupertinoListTile> {
     if (widget.subtitleBuilder != null) {
       subtitle = DefaultTextStyle(
         style: subtitleTextStyle,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
+        maxLines: widget._type == _CupertinoListTileType.notched ? 1 : null,
+        overflow: widget._type == _CupertinoListTileType.notched ? TextOverflow.ellipsis : TextOverflow.clip,
         child: Builder(
           builder: widget.subtitleBuilder!,
         )
@@ -349,6 +351,7 @@ class _EnhancedCupertinoListTileState extends State<EnhancedCupertinoListTile> {
       additionalInfo = DefaultTextStyle(
         style: additionalInfoTextStyle!,
         maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         child: widget.additionalInfo!,
       );
     }
@@ -390,24 +393,20 @@ class _EnhancedCupertinoListTileState extends State<EnhancedCupertinoListTile> {
               SizedBox(width: widget.leadingToTitle),
             ] else
               SizedBox(height: widget.leadingSize),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  title,
-                  if (subtitle != null) ...<Widget>[
-                    const SizedBox(height: _kNotchedTitleToSubtitle),
-                    subtitle,
-                  ],
-                ],
+            if (widget.additionalInfo == null || widget.additionalInfo is Text) // if additionalInfo is a Text, space priority should be given to title/subtitle
+              Expanded(
+                child: _ContentWithTitlesPriority(title: title, subtitle: subtitle, additional: additionalInfo),
+              )
+            else ...<Widget>[ // but if additionalInfo is something else, like a CupertinoSwitch, it gets space priority
+              Expanded(
+                child: _TitlesContent(
+                  title: title,
+                  subtitle: subtitle,
+                ),
               ),
-            ),
-            if (additionalInfo != null) ...<Widget>[
-              additionalInfo,
-              if (widget.trailing != null)
-                const SizedBox(width: _kAdditionalInfoToTrailing),
+              additionalInfo!
             ],
+            if (additionalInfo != null && widget.trailing != null) const SizedBox(width: _kAdditionalInfoToTrailing),
             if (widget.trailing != null) widget.trailing!
           ],
         ),
@@ -429,6 +428,67 @@ class _EnhancedCupertinoListTileState extends State<EnhancedCupertinoListTile> {
       },
       behavior: HitTestBehavior.opaque,
       child: child,
+    );
+  }
+}
+
+class _TitlesContent extends StatelessWidget {
+
+  final Widget title;
+  final Widget? subtitle;
+
+  const _TitlesContent({required this.title, this.subtitle, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        title,
+        if (subtitle != null) ...<Widget>[
+          const SizedBox(height: _kNotchedTitleToSubtitle),
+          subtitle!
+        ]
+      ]
+    );
+  }
+}
+
+
+class _ContentWithTitlesPriority extends StatelessWidget {
+
+  final Widget title;
+  final Widget? subtitle;
+  final Widget? additional;
+
+  const _ContentWithTitlesPriority({required this.title, this.subtitle, this.additional, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Row(
+          children: [
+            ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: constraints.maxWidth),
+              child: _TitlesContent(
+                title: title,
+                subtitle: subtitle,
+              )
+            ),
+            if (additional != null) Expanded(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: _kPaddingBetweenTitlesAndAdditionalInfo),
+                  child: additional!,
+                )
+              )
+            )
+          ]
+        );
+      }
     );
   }
 }
