@@ -393,9 +393,19 @@ class _EnhancedCupertinoListTileState extends State<EnhancedCupertinoListTile> {
               SizedBox(width: widget.leadingToTitle),
             ] else
               SizedBox(height: widget.leadingSize),
-            Expanded(
-              child: _InfoContent(title: title, subtitle: subtitle, additional: additionalInfo),
-            ),
+            if (widget.additionalInfo == null || widget.additionalInfo is Text) // if additionalInfo is a Text, space priority should be given to title/subtitle
+              Expanded(
+                child: _ContentWithTitlesPriority(title: title, subtitle: subtitle, additional: additionalInfo),
+              )
+            else ...<Widget>[ // but if additionalInfo is something else, like a CupertinoSwitch, it gets space priority
+              Expanded(
+                child: _TitlesContent(
+                  title: title,
+                  subtitle: subtitle,
+                ),
+              ),
+              additionalInfo!
+            ],
             if (additionalInfo != null && widget.trailing != null) const SizedBox(width: _kAdditionalInfoToTrailing),
             if (widget.trailing != null) widget.trailing!
           ],
@@ -422,14 +432,37 @@ class _EnhancedCupertinoListTileState extends State<EnhancedCupertinoListTile> {
   }
 }
 
+class _TitlesContent extends StatelessWidget {
 
-class _InfoContent extends StatelessWidget {
+  final Widget title;
+  final Widget? subtitle;
+
+  const _TitlesContent({required this.title, this.subtitle, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        title,
+        if (subtitle != null) ...<Widget>[
+          const SizedBox(height: _kNotchedTitleToSubtitle),
+          subtitle!
+        ]
+      ]
+    );
+  }
+}
+
+
+class _ContentWithTitlesPriority extends StatelessWidget {
 
   final Widget title;
   final Widget? subtitle;
   final Widget? additional;
 
-  const _InfoContent({required this.title, this.subtitle, this.additional, Key? key}) : super(key: key);
+  const _ContentWithTitlesPriority({required this.title, this.subtitle, this.additional, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -439,16 +472,9 @@ class _InfoContent extends StatelessWidget {
           children: [
             ConstrainedBox(
               constraints: BoxConstraints(maxWidth: constraints.maxWidth),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  title,
-                  if (subtitle != null) ...<Widget>[
-                    const SizedBox(height: _kNotchedTitleToSubtitle),
-                    subtitle!
-                  ]
-                ]
+              child: _TitlesContent(
+                title: title,
+                subtitle: subtitle,
               )
             ),
             if (additional != null) Expanded(

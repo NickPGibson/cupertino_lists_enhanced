@@ -4,10 +4,13 @@
 * Text Wrapping
   * Actual iOS behaviour:
     * Text is wrapped over several lines if there isn't enough space
+![Actual ios screenshot](https://raw.githubusercontent.com/NickPGibson/cupertino_lists_enhanced/main/misc/docs/images/actual_ios_text_wrapping.png)
   * CupertinoListTile behaviour:
     * Text is not wrapped over several lines, and some text may be lost
+![CupertinoListTile screenshot](https://raw.githubusercontent.com/NickPGibson/cupertino_lists_enhanced/main/misc/docs/images/flutter_text_wrapping.png)
   * EnhancedCupertinoListTile behaviour:
     * Text is wrapped over several lines if there isn't enough space
+![EnhancedCupertinoListTile screenshot](https://raw.githubusercontent.com/NickPGibson/cupertino_lists_enhanced/main/misc/docs/images/enhanced_text_wrapping.png)
 
 
 
