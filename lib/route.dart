@@ -66,22 +66,24 @@ class _SingleSelectionPageState<T> extends State<SingleSelectionPage<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final body = SingleChildScrollView(
-      child: CupertinoSingleSelection<T>(
-        header: widget.header,
-        footer: widget.footer,
-        headerType: widget.headerType,
-        footerType: widget.footerType,
-        children: widget.children,
-        selected: _selected,
-        onChanged: (newValue) {
-          setState(() {
-            _selected = newValue;
-          });
-          if (widget.onChanged != null) {
-            widget.onChanged!(_selected);
-          }
-        },
+    final body = SafeArea(
+      child: SingleChildScrollView(
+        child: CupertinoSingleSelection<T>(
+          header: widget.header,
+          footer: widget.footer,
+          headerType: widget.headerType,
+          footerType: widget.footerType,
+          children: widget.children,
+          selected: _selected,
+          onChanged: (newValue) {
+            setState(() {
+              _selected = newValue;
+            });
+            if (widget.onChanged != null) {
+              widget.onChanged!(_selected);
+            }
+          },
+        ),
       ),
     );
 
@@ -98,9 +100,7 @@ class _SingleSelectionPageState<T> extends State<SingleSelectionPage<T>> {
           navigationBar: CupertinoNavigationBar(
             middle: widget.title,
           ),
-          child: SafeArea(
-            child: body,
-          ),
+          child: body,
         );
     }
   }
