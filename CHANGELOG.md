@@ -1,3 +1,7 @@
+## 0.0.5
+
+* Added SafeArea to SingleSelectionPage when using a material scaffold.
+
 
 ## 0.0.4
 
