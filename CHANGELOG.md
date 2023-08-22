@@ -1,3 +1,9 @@
+## 0.1.0
+
+* Support for flutter 3.13.0
+
+
+
 ## 0.0.5
 
 * Added SafeArea to SingleSelectionPage when using a material scaffold.
