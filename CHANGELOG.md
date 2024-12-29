@@ -1,3 +1,7 @@
+## 0.1.2
+
+* Support for flutter 3.27 / Dart 3.6
+
 ## 0.1.1
 
 * Support for flutter 3.19 / Dart 3.3
