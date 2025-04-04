@@ -51,6 +51,7 @@ class CupertinoMultiSelection<T> extends StatelessWidget {
     this.footerType,
     this.checkMarkLocation = WidgetSelectionLocation.trailing,
     this.checkMarkColor,
+    this.backgroundColor,
     super.key});
 
   @override
