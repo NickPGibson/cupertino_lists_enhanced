@@ -48,7 +48,7 @@ class CupertinoSelection<T> extends StatelessWidget {
       headerType: headerType,
       footerType: footerType,
       children: children,
-      backgroundColor: backgroundColor
+      backgroundColor: backgroundColor ?? CupertinoColors.systemGroupedBackground,
     );
   }
 }
