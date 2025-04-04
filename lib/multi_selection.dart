@@ -38,6 +38,9 @@ class CupertinoMultiSelection<T> extends StatelessWidget {
   /// Optional checkMark color
   final Color? checkMarkColor;
 
+  /// Optional background color
+  final Color? backgroundColor;
+
   const CupertinoMultiSelection({
     required this.children,
     required this.selected,
@@ -57,6 +60,7 @@ class CupertinoMultiSelection<T> extends StatelessWidget {
       footer: footer,
       headerType: headerType,
       footerType: footerType,
+      backgroundColor: backgroundColor,
       children: children.map((item) => CupertinoSelectionTile<T>(
         title: item.title,
         subtitle: item.subtitle,
