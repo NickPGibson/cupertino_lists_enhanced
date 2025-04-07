@@ -26,6 +26,9 @@ class CupertinoSelectionTile<T> extends StatelessWidget {
   /// Called when a user taps this tile.
   final void Function(T? value)? onTap;
 
+  /// Optional checkMark color
+  final Color? checkMarkColor;
+
   /// Determines whether the check mark will be located on the leading (left) or trailing (right) side of the tile.
   final WidgetSelectionLocation checkMarkLocation;
 
@@ -36,6 +39,7 @@ class CupertinoSelectionTile<T> extends StatelessWidget {
     this.subtitle,
     this.value,
     this.onTap,
+    this.checkMarkColor,
     required this.enabled,
     Key? key}) : super(key: key);
 
@@ -60,9 +64,9 @@ class CupertinoSelectionTile<T> extends StatelessWidget {
     );
   }
 
-  Widget get _icon => isSelected ? const Icon(
+  Widget get _icon => isSelected ? Icon(
     CupertinoIcons.check_mark,
-    color: CupertinoColors.systemBlue,
+    color: checkMarkColor ?? CupertinoColors.systemBlue,
   ) : const SizedBox.shrink();
 }
 

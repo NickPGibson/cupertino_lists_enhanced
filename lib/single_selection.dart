@@ -36,6 +36,12 @@ class CupertinoSingleSelection<T> extends StatelessWidget {
   /// Determines whether the check mark will be located on the leading (left) or trailing (right) side of the tile.
   final WidgetSelectionLocation checkMarkLocation;
 
+  /// Optional checkMark color
+  final Color? checkMarkColor;
+
+  /// Optional background color
+  final Color? backgroundColor;
+
   const CupertinoSingleSelection({
     required this.children,
     this.selected,
@@ -45,6 +51,8 @@ class CupertinoSingleSelection<T> extends StatelessWidget {
     this.headerType,
     this.footerType,
     this.checkMarkLocation = WidgetSelectionLocation.trailing,
+    this.checkMarkColor,
+    this.backgroundColor,
     super.key});
 
   @override
@@ -54,12 +62,14 @@ class CupertinoSingleSelection<T> extends StatelessWidget {
       footer: footer,
       headerType: headerType,
       footerType: footerType,
+      backgroundColor: backgroundColor,
       children: children.map((item) => CupertinoSelectionTile<T>(
         title: item.title,
         subtitle: item.subtitle,
         value: item.value,
         isSelected: item.value == selected,
         checkMarkLocation: checkMarkLocation,
+        checkMarkColor : checkMarkColor,
         enabled: item.enabled,
         onTap: (item) {
           if (onChanged != null) {

@@ -21,6 +21,9 @@ class CupertinoSelection<T> extends StatelessWidget {
   /// If "base", the footer will be displayed in the style of the iOS settings app.
   final CupertinoListSectionType footerType;
 
+  /// Optional background color
+  final Color? backgroundColor;
+
   /// The options from which the user can choose.
   final List<Widget> children;
 
@@ -30,6 +33,7 @@ class CupertinoSelection<T> extends StatelessWidget {
     required this.footer,
     CupertinoListSectionType? headerType,
     CupertinoListSectionType? footerType,
+    this.backgroundColor,
     super.key
   }) :
     headerType = headerType ?? CupertinoListSectionType.base,
@@ -43,6 +47,7 @@ class CupertinoSelection<T> extends StatelessWidget {
       hasLeading: false,
       headerType: headerType,
       footerType: footerType,
+      backgroundColor: backgroundColor ?? CupertinoColors.systemGroupedBackground,
       children: children,
     );
   }
