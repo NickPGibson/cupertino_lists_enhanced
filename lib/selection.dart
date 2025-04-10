@@ -24,6 +24,9 @@ class CupertinoSelection<T> extends StatelessWidget {
   /// Optional background color
   final Color? backgroundColor;
 
+  /// Optional separator color
+  final Color? separatorColor;
+
   /// The options from which the user can choose.
   final List<Widget> children;
 
@@ -34,6 +37,7 @@ class CupertinoSelection<T> extends StatelessWidget {
     CupertinoListSectionType? headerType,
     CupertinoListSectionType? footerType,
     this.backgroundColor,
+    this.separatorColor,
     super.key
   }) :
     headerType = headerType ?? CupertinoListSectionType.base,
@@ -48,6 +52,7 @@ class CupertinoSelection<T> extends StatelessWidget {
       headerType: headerType,
       footerType: footerType,
       backgroundColor: backgroundColor ?? CupertinoColors.systemGroupedBackground,
+      separatorColor: separatorColor,
       children: children,
     );
   }
