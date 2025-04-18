@@ -437,7 +437,7 @@ class _TitlesContent extends StatelessWidget {
   final Widget title;
   final Widget? subtitle;
 
-  const _TitlesContent({required this.title, this.subtitle, Key? key}) : super(key: key);
+  const _TitlesContent({required this.title, this.subtitle});
 
   @override
   Widget build(BuildContext context) {
@@ -462,7 +462,7 @@ class _ContentWithTitlesPriority extends StatelessWidget {
   final Widget? subtitle;
   final Widget? additional;
 
-  const _ContentWithTitlesPriority({required this.title, this.subtitle, this.additional, Key? key}) : super(key: key);
+  const _ContentWithTitlesPriority({required this.title, this.subtitle, this.additional});
 
   @override
   Widget build(BuildContext context) {

@@ -48,7 +48,7 @@ class SingleSelectionPage<T> extends StatefulWidget {
     this.footer,
     this.headerType,
     this.footerType,
-    Key? key}) : super(key: key);
+    super.key});
 
   @override
   State<SingleSelectionPage<T>> createState() => _SingleSelectionPageState<T>();
