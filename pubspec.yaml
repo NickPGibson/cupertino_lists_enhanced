@@ -1,6 +1,6 @@
 name: cupertino_lists_enhanced
 description: Enhanced cupertino lists. Provides a list of options in the style of the iOS settings app. Choose an item (or items) from a list of options.
-version: 0.1.2
+version: 0.1.3
 repository: https://github.com/NickPGibson/cupertino_lists_enhanced
 issue_tracker: https://github.com/NickPGibson/cupertino_lists_enhanced/issues
 
