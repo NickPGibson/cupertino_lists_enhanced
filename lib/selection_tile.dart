@@ -41,7 +41,7 @@ class CupertinoSelectionTile<T> extends StatelessWidget {
     this.onTap,
     this.checkMarkColor,
     required this.enabled,
-    Key? key}) : super(key: key);
+    super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class _TitleTextStyle extends StatelessWidget {
   final Widget child;
   final bool enabled;
 
-  const _TitleTextStyle({required this.child, required this.enabled, Key? key}) : super(key: key);
+  const _TitleTextStyle({required this.child, required this.enabled});
 
   @override
   Widget build(BuildContext context) => DefaultTextStyle(
