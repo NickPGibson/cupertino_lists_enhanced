@@ -42,6 +42,9 @@ class CupertinoSingleSelection<T> extends StatelessWidget {
   /// Optional background color
   final Color? backgroundColor;
 
+  /// Optional separator color
+  final Color? separatorColor;
+
   const CupertinoSingleSelection({
     required this.children,
     this.selected,
@@ -53,6 +56,7 @@ class CupertinoSingleSelection<T> extends StatelessWidget {
     this.checkMarkLocation = WidgetSelectionLocation.trailing,
     this.checkMarkColor,
     this.backgroundColor,
+    this.separatorColor,
     super.key});
 
   @override
@@ -63,6 +67,7 @@ class CupertinoSingleSelection<T> extends StatelessWidget {
       headerType: headerType,
       footerType: footerType,
       backgroundColor: backgroundColor,
+      separatorColor: separatorColor,
       children: children.map((item) => CupertinoSelectionTile<T>(
         title: item.title,
         subtitle: item.subtitle,
