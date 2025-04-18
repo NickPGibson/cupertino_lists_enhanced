@@ -1,5 +1,5 @@
 
-/// [EnhancedCupertinoListTile] is based on [CupertinoListTile] from the Flutter standard library.
+// [EnhancedCupertinoListTile] is based on [CupertinoListTile] from the Flutter standard library.
 // The license of the original code is below.
 
 // Copyright 2014 The Flutter Authors. All rights reserved.

@@ -1,3 +1,7 @@
+## 0.1.3
+
+* Added custom separatorColor, backgroundColor and checkMarkColor
+
 ## 0.1.2
 
 * Support for flutter 3.27 / Dart 3.6
